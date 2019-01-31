@@ -1,0 +1,4 @@
+AuthUserFile /var/www/html/AirsoftExpo2/.htpasswd
+AuthName "Acces protege"
+AuthType Basic
+Require valid-user
