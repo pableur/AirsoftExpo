@@ -22,29 +22,141 @@ function convertInt($arg){
 function reportingTXT($idSelectExposant){
 	$reponse = $bdd->query('SELECT * FROM Exposants WHERE id='.$idSelectExposant);
 	while ($donnees = $reponse->fetch()){
-		$name=$donnees['name'];
-		$desc=$donnees['description'];
-		$siret			=$donnees['SIRET'];
-		$raisonSociale=$donnees['raison_sociale'];
+		$name			=$donnees['name'];
+		$desc			=$donnees['description'];
+		$siret				=$donnees['SIRET'];
+		$raisonSociale	=$donnees['raison_sociale'];
 		$adresse		=$donnees['adresse'];
-		$code_postal=$donnees['code_postal'];
+		$code_postal  =$donnees['code_postal'];
 		$ville				=$donnees['ville'];
 		$pays			=$donnees['pays'];
-		$site_internet=$donnees['site_internet'];
+		$site_internet 	=$donnees['site_internet'];
 		$email			=$donnees['email'];
-		$responsable=$donnees['responsable'];
-		$association =$donnees['association'];
-		$emplacement  =$donnees['emplacement'];
-		$nbTable =$donnees['tableExp'];
-		$badge  =$donnees['badge'];
-		$chaise  =$donnees['chaise'];
-		$descriptionVente  =$donnees['descriptionVente'];
-		$descriptionActivite  =$donnees['descriptionActivite'];
-		$remarque  =$donnees['remarque'];
-		$path= $donnees["Path"];
+		$responsable	=$donnees['responsable'];
+		$association 	=$donnees['association'];
+		$emplacement =$donnees['emplacement'];
+		$nbTable 		=$donnees['tableExp'];
+		$badge  		=$donnees['badge'];
+		$chaise  		=$donnees['chaise'];
+		$prix		  		=$donnees['prix'];
+		$descriptionVente  	=$donnees['descriptionVente'];
+		$descriptionActivite	=$donnees['descriptionActivite'];
+		$remarque  			=$donnees['remarque'];
+		$path					= $donnees["Path"];
 		
 		$mail='';
-		$mail+="Bonjour ".$responsable.'\n';
+		$mail.="Bonjour ".$responsable.'\n';
+		$mail.="Merci pour votre inscription à l'AirspoftExpo 2019. Voici un récapitulatif de votre dossier :\n";
+		if($association){
+			$mail.="Association :".$name.'\n';
+		}else{
+			$mail.=$name.'\n';
+		}
+		$mail.=$raisonSociale.'\n\n';
+
+		$mail.=$adresse.'\n';
+		$mail.=$code_postal.' '.$ville.' '.$pays.'\n';
+		$mail.=$site_internet.'\n\n';
+		
+		if($descriptionVente!=''){
+			$mail.="Description des ventes :\n";
+			$mail.=$descriptionVente;
+			$mail.="\n";
+		}
+		
+		if($descriptionActivite!=''){
+			$mail.="Description des activités :\n";
+			$mail.=$descriptionActivite;
+			$mail.="\n";
+		}
+		
+		if($remarque!=''){
+			$mail.="Remarque :\n";
+			$mail.=$remarque;
+			$mail.="\n";
+		}
+		
+		$mail.="Détail de la commande:\n";
+		$mail.='-'.(2+$nbTable).' table(s)\n';
+		$mail.='-'.(2+$badge).' badge(s)\n';
+		$mail.='-'.(2+$chaise).' chaise(s)\n';
+		$mail.='-Total : '.$prix.'€ \n\n';
+		$mail.=' Vous avez choisi de payer par : XXX \n\n';
+		
+		$mail.="Votre dossier est en cours de traitement, nous vous contacterons bientôt.\n\n";
+		$mail.="Bonne journée,\n";
+		$mail.="Toute l'équipe de l'AirsoftExpo 2019\n";
+
+		return $mail;
+	}
+}
+
+function reportingHTML($idSelectExposant){
+	$reponse = $bdd->query('SELECT * FROM Exposants WHERE id='.$idSelectExposant);
+	while ($donnees = $reponse->fetch()){
+		$name			=$donnees['name'];
+		$desc			=$donnees['description'];
+		$siret				=$donnees['SIRET'];
+		$raisonSociale	=$donnees['raison_sociale'];
+		$adresse		=$donnees['adresse'];
+		$code_postal  =$donnees['code_postal'];
+		$ville				=$donnees['ville'];
+		$pays			=$donnees['pays'];
+		$site_internet 	=$donnees['site_internet'];
+		$email			=$donnees['email'];
+		$responsable	=$donnees['responsable'];
+		$association 	=$donnees['association'];
+		$emplacement =$donnees['emplacement'];
+		$nbTable 		=$donnees['tableExp'];
+		$badge  		=$donnees['badge'];
+		$chaise  		=$donnees['chaise'];
+		$prix		  		=$donnees['prix'];
+		$descriptionVente  	=$donnees['descriptionVente'];
+		$descriptionActivite	=$donnees['descriptionActivite'];
+		$remarque  			=$donnees['remarque'];
+		$path					= $donnees["Path"];
+		
+		$mail='';
+		$mail.="Bonjour ".$responsable.'</br>';
+		$mail.="Merci pour votre inscription à l'AirspoftExpo 2019. Voici un récapitulatif de votre dossier :</br>";
+		if($association){
+			$mail.="Association :".$name.'</br>';
+		}else{
+			$mail.=$name.'</br>';
+		}
+		$mail.=$raisonSociale.'</br></br>';
+
+		$mail.=$adresse.'</br>';
+		$mail.=$code_postal.' '.$ville.' '.$pays.'</br>';
+		$mail.='<a href=".'$site_internet'.">'.$site_internet.'</a></br>';
+		
+		if($descriptionVente!=''){
+			$mail.="<h4>Description des ventes :</h4>";
+			$mail.='<p>'.$descriptionVente'</p>';
+		}
+		
+		if($descriptionActivite!=''){
+			$mail.="<h4>Description des activités :</h4>";
+			$mail.='<p>'.$descriptionActivite'</p>';
+		}
+		
+		if($remarque!=''){
+			$mail.="<h4>Remarque :</h4>";
+			$mail.='<p>'.$remarque'</p>';
+		}
+		
+		$mail.="Détail de la commande:\n";
+		$mail.="<ul>";
+		$mail.='<li>'.(2+$nbTable).' table(s)</li>';
+		$mail.='<li>'.(2+$badge).' badge(s)</li>';
+		$mail.='<li>'.(2+$chaise).' chaise(s)</li>';
+		$mail.='<li>Total : '.$prix.'€ </li>';
+		$mail.="</ul>";
+		$mail.=' Vous avez choisi de payer par : XXX  </br></br>';
+		
+		$mail.="Votre dossier est en cours de traitement, nous vous contacterons bientôt.</br>";
+		$mail.="Bonne journée,</br>";
+		$mail.="Toute l'équipe de l'AirsoftExpo 2019</br>";
 
 		return $mail;
 	}

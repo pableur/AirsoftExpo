@@ -67,15 +67,15 @@
 			
 			$name			=convert($_POST["name"]);
 			$description	=convert($_POST["description"]);
-			$siret			=convert($_POST["siret"]);
-			$raisonSociale=convert($_POST["raisonSociale"]);
+			$siret				=convert($_POST["siret"]);
+			$raisonSociale	=convert($_POST["raisonSociale"]);
 			$adresse		=convert($_POST["adresse"]);
-			$code_postal=convert($_POST["code_postal"]);
+			$code_postal	=convert($_POST["code_postal"]);
 			$ville				=convert($_POST["ville"]);
 			$pays			=convert($_POST["pays"]);
-			$site_internet=convert($_POST["site_internet"]);
+			$site_internet	=convert($_POST["site_internet"]);
 			$email			=convert($_POST["email"]);
-			$responsable=convert($_POST["responsable"]);
+			$responsable	=convert($_POST["responsable"]);
 			if(convert($_POST["inputType"])=="association"){
 				$association=1;
 			}else{
@@ -226,7 +226,7 @@
 				$sujet = "AirsoftExpo 2019 : inscription";
 				$message_txt = "Salut à tous, voici un e-mail envoyé par un script PHP.";
 				$message_html = "<html><head></head><body><b>Salut à tous</b>, voici un e-mail envoyé par un <i>script PHP</i>.</body></html>";
-				sendMail($email,$sujet,reportingTXT($idExposant),reportingTXT($idExposant));
+				sendMail($email,$sujet,reportingTXT($idExposant),reportingHTML($idExposant));
 
 			}else{
 			$erreure="Erreur sur l'identification de l'exposant";

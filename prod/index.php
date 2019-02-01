@@ -170,6 +170,15 @@
             </span>
             <h4 class="service-heading">Toboggan gonflable</h4>
           </div>
+		  
+          <div class="col-md-6">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-bullseye-arrow fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Tir sur cible</h4>
+          </div>
+		  
         </div>
       </div>
     </section>
@@ -240,7 +249,8 @@
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-money-bill-alt fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Entrée unique : 1 Euro</h4>
+           <!-- <h4 class="service-heading">Entrée unique : 1 Euro</h4>-->
+            <h4 class="service-heading">1€ pour les plus de 18 ans</h4>
           </div>
           <div class="col-md-4">
             <span class="fa-stack fa-4x">
